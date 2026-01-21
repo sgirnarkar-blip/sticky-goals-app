@@ -22,7 +22,7 @@ function App() {
       date: new Date().toLocaleDateString()
     };
     try {
-      const res = await fetch('http://localhost:5000/tasks', {
+      const res = await fetch('https://sticky-goals-app.onrender.coms', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newTaskData)
@@ -35,7 +35,7 @@ function App() {
 
   const toggleComplete = async (task) => {
     const newStatus = !task.completed;
-    await fetch(`http://localhost:5000/tasks/${task._id}`, {
+    await fetch(`https://sticky-goals-app.onrender.com/tasks/${task._id}`, {
       method: 'PATCH',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ completed: newStatus })
@@ -44,7 +44,7 @@ function App() {
   };
 
   const deleteTask = async (id) => {
-    await fetch(`http://localhost:5000/tasks/${id}`, { method: 'DELETE' });
+    await fetch(`https://sticky-goals-app.onrender.com/tasks/${id}`, { method: 'DELETE' });
     setTasks(tasks.filter(t => t._id !== id));
   };
 
