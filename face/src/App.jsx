@@ -7,7 +7,7 @@ function App() {
   const colors = ["#ffdac1", "#b2e2f2", "#fdfd96", "#b2f2bb", "#ffb7b2"];
 
   useEffect(() => {
-    fetch('http://localhost:5000/tasks')
+    fetch('https://sticky-goals-app.onrender.com')
       .then(res => res.json())
       .then(data => setTasks(Array.isArray(data) ? data : []))
       .catch(err => console.error("Fetch error:", err));
