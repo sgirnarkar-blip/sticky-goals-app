@@ -6,8 +6,9 @@ function App() {
   const [input, setInput] = useState("");
   const colors = ["#ffdac1", "#b2e2f2", "#fdfd96", "#b2f2bb", "#ffb7b2"];
 
+  // FIXED: Added /tasks to the URL
   useEffect(() => {
-    fetch('https://sticky-goals-app.onrender.com')
+    fetch('https://sticky-goals-app.onrender.com/tasks')
       .then(res => res.json())
       .then(data => setTasks(Array.isArray(data) ? data : []))
       .catch(err => console.error("Fetch error:", err));
@@ -22,7 +23,8 @@ function App() {
       date: new Date().toLocaleDateString()
     };
     try {
-      const res = await fetch('https://sticky-goals-app.onrender.coms', {
+      // FIXED: Removed extra 's' and added /tasks
+      const res = await fetch('https://sticky-goals-app.onrender.com/tasks', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(newTaskData)
@@ -54,16 +56,13 @@ function App() {
         <h1 style={styles.title}>✨ Todays tasks</h1>
         <div style={styles.dots}>............</div>
         <div style={styles.inputRow}>
-         <input 
-         value={input} 
-        onChange={(e) => setInput(e.target.value)} 
-  
-         // ADD THIS LINE BELOW:
-        onKeyDown={(e) => e.key === 'Enter' && addTask()} 
-  
-        placeholder="Plant a new goal..."
-        style={styles.inputField}
-        />
+          <input 
+            value={input} 
+            onChange={(e) => setInput(e.target.value)} 
+            onKeyDown={(e) => e.key === 'Enter' && addTask()} 
+            placeholder="Plant a new goal..."
+            style={styles.inputField}
+          />
           <button onClick={addTask} style={styles.addBtn}>Add</button>
         </div>
       </div>
@@ -72,8 +71,6 @@ function App() {
         <AnimatePresence>
           {tasks.map((task) => (
             <motion.div
-            
-           
               key={task._id} initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}
               style={{ ...styles.note, backgroundColor: task.color }}
             >
