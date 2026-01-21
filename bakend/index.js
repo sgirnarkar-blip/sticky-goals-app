@@ -2,7 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 app.use(cors()); // This allows all origins, which is easiest for now
-require('dotenv').config();
+
 
 const app = express();
 app.use(cors());
